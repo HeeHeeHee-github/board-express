@@ -42,6 +42,11 @@
       background-color: dodgerblue;
     }
 
+    .btn.green {
+      background-color: darkgreen;
+      color: #fff;
+    }
+
     .btn.red {
       background-color: coral;
     }
@@ -115,6 +120,7 @@
 <body>
   <div class="inner">
     <div class="board_container">
+      <a class="btn green" href="/">홈으로</a>
       <div class="board_header">
         <h1>Sunghee's Board</h1>
       </div>
@@ -122,20 +128,25 @@
         <span>현재 등록 글 : &nbsp; <%= articleCounts %></span>
         <!-- localhost:4000/board/write -->
         <a class="btn red" href="/dbBoard/write">글쓰기</a>
+        <a class="btn orange" href="/login/logout">로그아웃</a>
       </div>
       <div class="board_body">
         <ul class="board">
           <% if (articleCounts > 0) { %>
           <% for(let i=0; i < articleCounts; i++) { %>
           <li>
+            <div class="author">작성자 : <%= ARTICLE[i].USER_ID %></div>
             <div class="title"><%= ARTICLE[i].TITLE %></div>
             <div class="content"><%= ARTICLE[i].CONTENT %></div>
             <div class="foot">
+              <% if (ARTICLE[i].USER_ID === userId) { %>
               <a class="btn orange" href="/dbBoard/modify/<%= ARTICLE[i].ID_PK %>">수정</a>
               <a class="btn blue" href="#" onclick="deleteArticle('<%= ARTICLE[i].ID_PK %>')">삭제</a>
+              <% } %>
             </div>
           </li>
-          <% } %> <% } else { %>
+          <% } %>
+          <% } else { %>
           <li>
             <div class="title">글이 없습니다!</div>
             <% } %>

@@ -9,25 +9,42 @@
   <link rel="stylesheet" href="/css/style.css" />
   <!-- <script defer src="/js/main.js"></script> -->
   <style>
-    a {
-      text-decoration: underline;
-      color: rgb(135, 135, 135);
+    .btn {
+      padding: 5px 10px;
+      border-radius: 10px;
+      margin: 0 5px;
+      font-weight: bold;
+      color: #000;
+      text-decoration: none;
+    }
+
+    .btn.orange {
+      background-color: orange;
+    }
+
+    .btn.orange {
+      background-color: orange;
+    }
+
+    .btn.orange {
+      background-color: orange;
     }
   </style>
 </head>
 
 <body>
   <h1>Welcome to Hee Express Service!</h1>
-  <a href="./login">
-    <h2>로그인 페이지로 이동</h2>
+  <a class="btn orange" href="./login">
+    로그인
   </a>
-  <a href="./register">
-    <h2>회원가입 페이지로 이동</h2>
+  <a class="btn orange" href="./register">
+    회원가입
   </a>
-  <a href="./board">
-    <h2>게시판 페이지로 이동</h2>
+  <a class="btn orange" href="./dbBoard">
+    게시판
   </a>
 
+  <br />
   <br />
   <img src="/images/puppy.jpeg" />
 

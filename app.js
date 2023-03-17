@@ -33,6 +33,8 @@ const boardRouter = require('./routes/board');
 const dbRouter = require('./routes/db');
 const dbBoardRouter = require('./routes/dbBoard');
 const cookieRouter = require('./routes/cookie');
+const registerRouter = require('./routes/register');
+const loginRouter = require('./routes/login');
 
 app.use('/', mainRouter);
 app.use('/users', userRouter);
@@ -40,6 +42,8 @@ app.use('/board', boardRouter);
 app.use('/db', dbRouter);
 app.use('/dbBoard', dbBoardRouter);
 app.use('/cookie', cookieRouter);
+app.use('/register', registerRouter);
+app.use('/login', loginRouter);
 
 app.use((err, req, res, next) => {
   console.log(err.stack);
