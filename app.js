@@ -2,9 +2,11 @@ const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+require('dotenv').config();
 
 const app = express();
-const PORT = 4000;
+// const PORT = 4000;
+const { PORT } = process.env;
 
 app.use(cors()); // 서버 설정
 app.set('view engine', 'ejs');
@@ -15,15 +17,15 @@ app.use(express.static('public'));
 // 아니면 undefinded가 출력
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser('hee'));
 app.use(
   session({
     secret: 'hee',
     resave: false,
     saveUninitialized: true,
-    cookie: {
-      maxAge: 1000 * 60 * 60, // 1시간
-    },
+    // cookie: {
+    //   maxAge: 1000 * 60 * 60, // 1시간
+    // },
   }),
 );
 

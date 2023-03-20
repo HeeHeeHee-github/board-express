@@ -13,11 +13,11 @@ const boardDB = {
   // 게시글 추가하기
   writeArticle: (newArticle, cb) => {
     connection.query(
-      `INSERT INTO mydb1.board (TITLE, CONTENT) VALUES ('${newArticle.title}', '${newArticle.content}');`,
+      `INSERT INTO mydb1.board (USER_ID, TITLE, CONTENT) VALUES ('${newArticle.userId}','${newArticle.title}', '${newArticle.content}');`,
       (err, data) => {
         if (err) throw err;
         cb(data);
-      }
+      },
     );
   },
 
@@ -28,7 +28,7 @@ const boardDB = {
       (err, data) => {
         if (err) throw err;
         cb(data);
-      }
+      },
     );
   },
 
@@ -39,7 +39,7 @@ const boardDB = {
       (err, data) => {
         if (err) throw err;
         cb(data);
-      }
+      },
     );
   },
 
@@ -50,7 +50,7 @@ const boardDB = {
       (err, data) => {
         if (err) throw err;
         cb(data);
-      }
+      },
     );
   },
 };

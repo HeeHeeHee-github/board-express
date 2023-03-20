@@ -5,9 +5,10 @@ const router = express.Router();
 
 // 로그인 확인용 미들웨어
 function isLogin(req, res, next) {
-  if (req.session.login) {
-    next();
+  if (req.session.login || req.signedCookies.user) {
+    next(); // 다음 미들웨어로 넘어가게 해주는 next()
   } else {
+    res.status(400);
     res.send('로그인 해주세요. <br><a href="/login">로그인 페이지로 이동</a>');
   }
 }
@@ -16,6 +17,7 @@ function isLogin(req, res, next) {
 // localhost:4000/dbBoard
 router.get('/', isLogin, (req, res) => {
   // login 상태일때!
+  console.log(req.session.login);
   if (req.session.login === true) {
     boardDB.getAllArticles((data) => {
       const ARTICLE = data;
@@ -42,9 +44,14 @@ router.get('/write', isLogin, (req, res) => {
 
 // 글쓰기
 router.post('/write', isLogin, (req, res) => {
+  // USER_ID ---> req.session.userId
   if (req.body.title && req.body.content) {
-    boardDB.writeArticle(req.body, (data) => {
-      console.log(data);
+    const newArticle = {
+      userId: req.session.userId,
+      title: req.body.title,
+      content: req.body.content,
+    };
+    boardDB.writeArticle(newArticle, (data) => {
       // 쿼리 성공 여부 확인 if문
       if (data.affectedRows >= 1) {
         res.redirect('/dbBoard');
