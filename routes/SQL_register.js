@@ -1,5 +1,4 @@
 const express = require('express');
-const { userCheck } = require('../controllers/userController');
 
 const userDB = require('../controllers/userController');
 
