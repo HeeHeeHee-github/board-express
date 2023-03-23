@@ -27,10 +27,13 @@ const writeArticle = async (req, res) => {
     const client = await mongoClient.connect();
     const board = client.db('hee').collection('board');
 
+    // console.log(req.file);
+
     const newArticle = {
       USER_ID: req.session.userId,
       TITLE: req.body.title,
       CONTENT: req.body.content,
+      IMAGE: req.file ? req.file.filename : null, // 저장했으면 filename 넣어주고, 아니면 null 값 넣어줌
     };
     await board.insertOne(newArticle);
     res.redirect('/dbBoard');
@@ -60,10 +63,16 @@ const modifyArticle = async (req, res) => {
     const client = await mongoClient.connect();
     const board = client.db('hee').collection('board');
 
-    await board.updateOne(
-      { _id: ObjectId(req.params.id) },
-      { $set: { TITLE: req.body.title, CONTENT: req.body.content } },
-    );
+    // 수정한 사진에 대한 정보가 콘솔에 제대로 찍히는지 확인
+    // console.log(req.file);
+
+    const modify = {
+      TITLE: req.body.title,
+      CONTENT: req.body.content,
+    };
+
+    if (req.file) modify.IMAGE = req.file.filename;
+    await board.updateOne({ _id: ObjectId(req.params.id) }, { $set: modify });
     res.status(200);
     res.redirect('/dbBoard');
   } catch (err) {

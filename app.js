@@ -11,6 +11,7 @@ const { PORT } = process.env;
 app.use(cors()); // 서버 설정
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
+app.use('/uploads', express.static('uploads'));
 
 // body.parser을 선언하는 이유 -> 폼 태그에 있는 정보들을 req.body 에 담기 위해
 // 밑에 ROUTER 위에 써야함

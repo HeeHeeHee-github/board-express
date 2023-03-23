@@ -11,6 +11,15 @@ router.get('/', (req, res) => {
 // 로그인 처리
 router.post('/', loginUser);
 
+// 로그아웃
+router.get('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) throw err;
+    res.clearCookie('user');
+    res.redirect('/');
+  });
+});
+
 // router.post('/', (req, res) => {
 //   userDB.userCheck(req.body.id, (data) => {
 //     if (data.length === 1) {
@@ -42,13 +51,5 @@ router.post('/', loginUser);
 //     }
 //   });
 // });
-
-router.get('/logout', (req, res) => {
-  req.session.destroy((err) => {
-    if (err) throw err;
-    res.clearCookie('user');
-    res.redirect('/');
-  });
-});
 
 module.exports = router;
