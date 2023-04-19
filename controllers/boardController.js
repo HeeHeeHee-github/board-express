@@ -87,7 +87,7 @@ const deleteArticle = async (req, res) => {
     const board = client.db('hee').collection('board');
 
     await board.deleteOne({ _id: ObjectId(req.params.id) });
-    res.status(200).json('삭제 성공');
+    res.status(200).json('삭제되었습니다.');
   } catch (err) {
     console.error(err);
     res.status(500).send(err.message + UNEXPECTED_MSG);
